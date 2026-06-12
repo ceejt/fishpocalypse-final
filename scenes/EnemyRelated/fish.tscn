@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cudh7e2jibvxb" path="res://scripts/Fish/fish.gd" id="1_202cl"]
 [ext_resource type="Texture2D" uid="uid://duwgbcpnh4ysr" path="res://assets/sprites/isda_normal.png" id="2_202cl"]
+[ext_resource type="AudioStream" uid="uid://bjoljwdhhwxof" path="res://assets/audio/enemy_hurt.mp3" id="3_4i7jc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_202cl"]
 atlas = ExtResource("2_202cl")
@@ -32,7 +33,7 @@ size = Vector3(1.4510918, 1.8967285, 0.31103516)
 collision_layer = 2
 script = ExtResource("1_202cl")
 
-[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=1644682285]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1644682285]
 pixel_size = 0.05
 billboard = 1
 shaded = true
@@ -44,5 +45,8 @@ autoplay = "default"
 frame_progress = 0.80924106
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1335891917]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.028360367, -0.015014648, 0)
 shape = SubResource("BoxShape3D_4i7jc")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1498403589]
+stream = ExtResource("3_4i7jc")
+max_polyphony = 5

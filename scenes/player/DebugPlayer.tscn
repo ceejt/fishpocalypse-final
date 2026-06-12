@@ -11,10 +11,13 @@
 [ext_resource type="Script" uid="uid://sac2ms5xt7bk" path="res://scripts/player/combat_system.gd" id="6_q2jae"]
 [ext_resource type="Script" uid="uid://xpnm82ynjqsm" path="res://scripts/itemSystem/items_db.gd" id="7_blpqp"]
 [ext_resource type="Script" uid="uid://bui002s885pkf" path="res://scripts/ui/player_hud.gd" id="8_hud"]
+[ext_resource type="Script" uid="uid://c6xm1esa8nsrh" path="res://scripts/ui/enemy_indicator.gd" id="9_ind"]
 [ext_resource type="Texture2D" uid="uid://bvosluw4bj2ob" path="res://assets/sprites/border_health.png" id="12_bmswy"]
+[ext_resource type="Texture2D" uid="uid://odyn88wwwt5i" path="res://assets/sprites/fists.png" id="13_blpqp"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xit8r"]
-size = Vector3(1.5, 1.5, 0.5)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dp"]
+radius = 0.4
+height = 1.8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ok2xt"]
 atlas = ExtResource("2_gf0uj")
@@ -330,19 +333,85 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_blpqp"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(0, 0, 166, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p3k1"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(0, 166, 166, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5o41x"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(166, 0, 166, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpf55"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(332, 0, 166, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r30pt"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(166, 166, 166, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nijgu"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(332, 166, 166, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucx8u"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(0, 332, 166, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or8t6"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(166, 332, 166, 166)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpf55"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blpqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p3k1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5o41x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpf55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r30pt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nijgu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ucx8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or8t6")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_blpqp"]
+
 [node name="DebugPlayer" type="CharacterBody3D" unique_id=1697580463]
+floor_snap_length = 0.5
 script = ExtResource("1_x2lrw")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=629382131]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 6, 10)
-visible = false
 current = true
 fov = 37.849285
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=787803252]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1639091780]
-shape = SubResource("BoxShape3D_xit8r")
+shape = SubResource("CapsuleShape3D_dp")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=639763124]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -353,17 +422,17 @@ alpha_cut = 3
 alpha_scissor_threshold = 1.0
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_id87f")
-animation = &"item_consume"
-frame_progress = 0.3019595
+animation = &"idle"
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1495656726]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.4519567, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.4519567, 0)
 visible = false
 light_color = Color(1, 0, 0, 1)
-light_energy = 5.0
+light_energy = 3.0
+light_bake_mode = 1
 shadow_enabled = true
-spot_range = 7.143156
-spot_angle = 44.10083
+spot_range = 6.226308
+spot_angle = 49.290104
 
 [node name="Kamot" type="Marker3D" parent="." unique_id=265468261]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35141972, -0.22932763, 0.16790777)
@@ -520,11 +589,59 @@ layout_mode = 2
 theme_override_constants/outline_size = 15
 text = "SP"
 
-[node name="FishingPrompt" type="Label3D" parent="."]
-position = Vector3(0, 2.2, 0)
+[node name="EnemyCounter" type="Label" parent="UI_HUD" unique_id=100000015]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1219.0
+offset_top = 609.0
+offset_right = -1011.0
+offset_bottom = 649.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 22
+text = "Enemies: --"
+horizontal_alignment = 2
+
+[node name="EnemyIndicator" type="Control" parent="UI_HUD" unique_id=100000016]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_ind")
+
+[node name="ColorRect" type="ColorRect" parent="UI_HUD" unique_id=768634712]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FishingPrompt" type="Label3D" parent="." unique_id=466541008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+visible = false
 pixel_size = 0.01
-text = "Press F to Fish"
-font_size = 32
 billboard = 1
 modulate = Color(1, 1, 0, 1)
-visible = false
+text = "Press F to Fish"
+
+[node name="PunchHitbox" type="Area3D" parent="." unique_id=1885591604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5360865)
+collision_mask = 2
+
+[node name="FistSprite" type="AnimatedSprite3D" parent="PunchHitbox" unique_id=673358594]
+billboard = 1
+shaded = true
+sprite_frames = SubResource("SpriteFrames_wpf55")
+animation = &"new_animation"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PunchHitbox" unique_id=1154839011]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0.5373771)
+shape = SubResource("BoxShape3D_blpqp")

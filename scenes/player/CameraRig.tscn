@@ -1,9 +1,30 @@
 [gd_scene format=3 uid="uid://dujw7glgc57os"]
 
 [ext_resource type="Script" uid="uid://b8camrig7kq21" path="res://scripts/player/camera_rig.gd" id="1_cr"]
+[ext_resource type="Shader" uid="uid://by4cpnt3ocpl0" path="res://scenes/player/CameraRig.gdshader" id="2_kphcg"]
 
-[node name="CameraRig" type="Node3D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5gjmg"]
+shader = ExtResource("2_kphcg")
+shader_parameter/scanline_strength = 0.18800000893
+shader_parameter/scanline_count = 46.122001715795
+shader_parameter/vignette_strength = 0.25
+shader_parameter/aberration = 0.002
+shader_parameter/wave_speed = 1.5
+shader_parameter/wave_strength = 0.004
+
+[node name="CameraRig" type="Node3D" unique_id=139105151]
 script = ExtResource("1_cr")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=166346868]
 fov = 60.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1750908603]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1393820405]
+material = SubResource("ShaderMaterial_5gjmg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

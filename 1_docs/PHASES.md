@@ -64,7 +64,7 @@ _None yet_
 
 ---
 
-## Phase 2 — Player Foundation `IN PROGRESS` _(CJ)_
+## Phase 2 — Player Foundation `DONE` _(CJ)_
 
 **Goal:** Player moves, aims, and has HP/CP/SP stats that follow the regen rules. Camera follows them.
 
@@ -78,7 +78,7 @@ _None yet_
 - [x] CP stat: starts full; depletes on fire (Phase 3); recharges at rate over time
 - [x] SP stat: starts full; depletes on dodge (Phase 3); regenerates over time
 - [x] `CameraRig` as a separate scene tracking Player's XZ position (lerp speed configurable)
-- [ ] Player does not fall through Island
+- [x] Player does not fall through Island
 
 ### Reminders
 - `Health` component will be reused verbatim on enemies in Phase 4

@@ -25,6 +25,7 @@ var _player_in_range := false
 
 
 func _ready() -> void:
+	add_to_group("item_spawners")
 	$Area3D.body_entered.connect(_on_body_entered)
 	$Area3D.body_exited.connect(_on_body_exited)
 

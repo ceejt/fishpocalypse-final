@@ -64,10 +64,10 @@ func is_active() -> bool:
 func _set_state(s: State) -> void:
 	_state = s
 	visible = false
-	_white_bg. visible = false
 	_wait_label.visible = false
 	_bite_label.visible = false
 	$CenterBox.visible = false
+	_white_bg. visible = false
 	_reel_audio.stop()
 
 	match s:
@@ -82,8 +82,8 @@ func _set_state(s: State) -> void:
 			_bite_label.visible = true
 		State.ACTIVE:
 			visible = true
-			_white_bg.visible = true
 			$CenterBox.visible = true
+			_white_bg.visible = true
 			_fish_pos = 0.5
 			_fish_vel = 0.0
 			_zone_pos = 0.35
@@ -96,11 +96,13 @@ func _set_state(s: State) -> void:
 		State.RESULT_SUCCESS:
 			visible = true
 			$CenterBox.visible = true
+			_white_bg.visible = true
 			_result_timer = RESULT_DISPLAY_TIME
 			_caught_audio.play()
 		State.RESULT_FAIL:
 			visible = true
 			$CenterBox.visible = true
+			_white_bg.visible = true
 			_result_timer = RESULT_DISPLAY_TIME
 
 func _process(delta: float) -> void:

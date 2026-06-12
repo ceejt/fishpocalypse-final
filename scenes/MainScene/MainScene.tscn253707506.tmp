@@ -1,0 +1,727 @@
+[gd_scene format=3 uid="uid://cqjk6u4wv4adb"]
+
+[ext_resource type="Script" uid="uid://cddg1xr5hye1d" path="res://addons/MarchingSquaresTerrain/algorithm/terrain/marching_squares_terrain.gd" id="1_scy8l"]
+[ext_resource type="Script" uid="uid://dqeuj3gddfm65" path="res://addons/MarchingSquaresTerrain/editor/tools/scripts/marching_squares_texture_names.gd" id="2_b37wp"]
+[ext_resource type="Texture2D" uid="uid://cxvnfgy865wsk" path="res://addons/MarchingSquaresTerrain/resources/plugin_materials/grass_leaf_sprite.png" id="3_g63d6"]
+[ext_resource type="Texture2D" uid="uid://bqfs0f51m3adc" path="res://assets/resources/sand.tres" id="3_ruire"]
+[ext_resource type="Script" uid="uid://c5yuywww81uee" path="res://addons/MarchingSquaresTerrain/editor/tools/scripts/marching_squares_texture_list.gd" id="4_ewnbt"]
+[ext_resource type="Texture2D" uid="uid://dbnc04k3n0sro" path="res://addons/MarchingSquaresTerrain/resources/plugin_materials/grass_terrain_noise.res" id="5_61ffe"]
+[ext_resource type="Script" uid="uid://mtlf02qfkqp5" path="res://addons/MarchingSquaresTerrain/editor/tools/scripts/marching_squares_quick_paint.gd" id="7_wwp34"]
+[ext_resource type="Script" uid="uid://fvb3vi413siv" path="res://addons/MarchingSquaresTerrain/editor/tools/scripts/marching_squares_texture_preset.gd" id="8_40akt"]
+[ext_resource type="Script" uid="uid://cql4d8s5t5xcx" path="res://addons/MarchingSquaresTerrain/algorithm/terrain/marching_squares_terrain_chunk.gd" id="9_oye2u"]
+[ext_resource type="Script" uid="uid://22l7ysgniux3" path="res://addons/MarchingSquaresTerrain/algorithm/grass/marching_squares_grass_planter.gd" id="10_h6vph"]
+[ext_resource type="PackedScene" uid="uid://c7nwvepnxcsw" path="res://scenes/player/DebugPlayer.tscn" id="11_jwbod"]
+[ext_resource type="Shader" uid="uid://cbd0h0rh7wpph" path="res://shader/clouds.gdshader" id="12_b37wp"]
+[ext_resource type="Shader" uid="uid://b8e01oiuos4am" path="res://shader/ocean.gdshader" id="12_ewnbt"]
+[ext_resource type="Texture2D" uid="uid://kxdso5iygehk" path="res://assets/resources/wave_noise.tres" id="13_61ffe"]
+[ext_resource type="Texture2D" uid="uid://cv4ugy50jeh4i" path="res://assets/resources/cloud_noise.tres" id="13_g63d6"]
+[ext_resource type="Script" uid="uid://d2m8wwurpal4s" path="res://scripts/fishSystem/fishing_system.gd" id="14_fsys"]
+[ext_resource type="ArrayMesh" uid="uid://dxqp0wkpiex87" path="res://assets/models/kahoy/Sketchfab_Scene_coconut_tree_coconut_tree_mat_0.res" id="14_qrpbx"]
+[ext_resource type="Script" uid="uid://cb2jjm11a4e1i" path="res://scripts/EnvironmentRelated/dagat_script.gd" id="15_auh40"]
+[ext_resource type="PackedScene" uid="uid://cgxmpu1beld0d" path="res://scenes/FishingRelated/fishing_minigame.tscn" id="15_fmg"]
+[ext_resource type="AudioStream" uid="uid://om8oo53ef3fb" path="res://assets/audio/nature_sea.mp3" id="15_ruire"]
+[ext_resource type="PackedScene" path="res://scenes/FishingRelated/fishing_spot.tscn" id="16_fsp"]
+[ext_resource type="Resource" uid="uid://dyjmr7uqctvpk" path="res://assets/resources/items/items_db.tres" id="17_db"]
+[ext_resource type="AudioStream" uid="uid://c7hcdv2c20g5g" path="res://assets/audio/nature_wind.mp3" id="17_mgn8j"]
+[ext_resource type="AudioStream" uid="uid://bsjj75pl8hp15" path="res://assets/audio/nature_bird.mp3" id="18_663dh"]
+[ext_resource type="Resource" uid="uid://lih8tf53aotr" path="res://assets/resources/rarities/rarity_config.tres" id="18_rc"]
+[ext_resource type="PackedScene" uid="uid://x0tobd048vlo" path="res://scenes/EnemyRelated/enemySpawner.tscn" id="21_v3fq3"]
+[ext_resource type="PackedScene" uid="uid://dwr1m6px173c6" path="res://scenes/DayNightSystem/dayNightSystem.tscn" id="23_bv014"]
+[ext_resource type="PackedScene" path="res://scenes/player/CameraRig.tscn" id="24_cr"]
+[ext_resource type="PackedScene" uid="uid://sheavwaiaj2f" path="res://scenes/EnemyRelated/tank_fish.tscn" id="24_oj3ja"]
+[ext_resource type="PackedScene" uid="uid://by4e1q3ce1ehm" path="res://scenes/EnemyRelated/fish.tscn" id="25_mlmqm"]
+[ext_resource type="Script" uid="uid://d0testdmy1p4r" path="res://scripts/test_dummy.gd" id="25_td"]
+[ext_resource type="Script" uid="uid://butapasd4olx0" path="res://scripts/components/health_component.gd" id="26_hc"]
+[ext_resource type="PackedScene" uid="uid://hxknigqyh2fs" path="res://scenes/EnemyRelated/ranged_fish.tscn" id="26_mlmqm"]
+[ext_resource type="Script" path="res://scripts/player/debug_hud.gd" id="27_dh"]
+
+[sub_resource type="Texture2D" id="Texture2D_p1dug"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="Texture2D" id="Texture2D_38l2j"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="Texture2D" id="Texture2D_ta716"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="Texture2D" id="Texture2D_1nue7"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="Texture2D" id="Texture2D_iuhot"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="Texture2D" id="Texture2D_vk8tc"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="Texture2D" id="Texture2D_11ep3"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="Texture2D" id="Texture2D_fpfsv"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="Resource" id="Resource_38l2j"]
+script = ExtResource("2_b37wp")
+metadata/_custom_type_script = "uid://dqeuj3gddfm65"
+
+[sub_resource type="Resource" id="Resource_658wv"]
+script = ExtResource("4_ewnbt")
+terrain_textures = Array[Texture2D]([ExtResource("5_61ffe"), ExtResource("3_ruire"), ExtResource("5_61ffe"), ExtResource("5_61ffe"), ExtResource("5_61ffe"), ExtResource("3_ruire"), null, SubResource("Texture2D_p1dug"), SubResource("Texture2D_38l2j"), SubResource("Texture2D_ta716"), SubResource("Texture2D_1nue7"), SubResource("Texture2D_iuhot"), SubResource("Texture2D_vk8tc"), SubResource("Texture2D_11ep3"), SubResource("Texture2D_fpfsv")])
+texture_scales = Array[float]([1.4, 3.6, 0.7999999999999999, 1.3, 1.2000000000000002, 3.0, 1.2000000000000002, 0.9, 1.0, 1.1, 1.0, 0.9, 1.0, 1.0, 1.0])
+grass_colors = Array[Color]([Color(0.5620437, 0.9140625, 0.016662616, 1), Color(1, 0.9265203, 0.3203125, 1), Color(0.56078434, 0.78431374, 0.015686275, 1), Color(0.48974344, 0.8255208, 0.032246906, 1), Color(0.4244792, 0.2130686, 0.029846193, 1), Color(0.9869792, 0.8628438, 0.26473662, 1)])
+has_grass = Array[bool]([false, true, true, false, false])
+
+[sub_resource type="Resource" id="Resource_uyltb"]
+script = ExtResource("8_40akt")
+preset_name = "Empty Project"
+new_tex_names = SubResource("Resource_38l2j")
+new_textures = SubResource("Resource_658wv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61ffe"]
+render_priority = 0
+shader = ExtResource("12_ewnbt")
+shader_parameter/noise_tex = ExtResource("13_61ffe")
+shader_parameter/water_color = Color(0, 0.3311313, 0.81871474, 1)
+shader_parameter/speed = 0.01
+shader_parameter/strength = 0.3
+shader_parameter/pixel_size = 256.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cbjsr"]
+material = SubResource("ShaderMaterial_61ffe")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qrpbx"]
+size = Vector3(1, 4.9920654, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ruire"]
+size = Vector3(67, 5, 150)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g63d6"]
+render_priority = 0
+shader = ExtResource("12_b37wp")
+shader_parameter/noise_tex = ExtResource("13_g63d6")
+shader_parameter/alpha_cutoff = 0.70000003325
+shader_parameter/speed = 0.0030000001425
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_b37wp"]
+material = SubResource("ShaderMaterial_g63d6")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dummy"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dummy"]
+size = Vector3(1, 2, 1)
+
+[node name="TestScene" type="Node3D" unique_id=469542510]
+
+[node name="DN_CYCLE" parent="." unique_id=1953072460 instance=ExtResource("23_bv014")]
+transform = Transform3D(0.7071067, 0.49999997, -0.49999994, 0, 0.70710677, 0.7071067, 0.7071067, -0.49999997, 0.49999994, 0, 90, 10)
+day_length_sec = 20
+speed_factor = 20.0
+
+[node name="ISLAND" type="Node3D" parent="." unique_id=780296146]
+
+[node name="MarchingSquaresTerrain" type="Node3D" parent="ISLAND" unique_id=611527923]
+script = ExtResource("1_scy8l")
+data_directory = "res://scenes/TestScene_TerrainData/MarchingSquaresTerrain_cb34eac5"
+_storage_initialized = true
+grass_subdivisions = 10
+grass_size = Vector2(0.8, 0.8)
+texture_2 = ExtResource("3_ruire")
+texture_6 = ExtResource("3_ruire")
+texture_8 = SubResource("Texture2D_p1dug")
+texture_9 = SubResource("Texture2D_38l2j")
+texture_10 = SubResource("Texture2D_ta716")
+texture_11 = SubResource("Texture2D_1nue7")
+texture_12 = SubResource("Texture2D_iuhot")
+texture_13 = SubResource("Texture2D_vk8tc")
+texture_14 = SubResource("Texture2D_11ep3")
+texture_15 = SubResource("Texture2D_fpfsv")
+tex2_has_grass = false
+tex5_has_grass = false
+tex6_has_grass = false
+texture_albedo_1 = Color(0.5620437, 0.9140625, 0.016662616, 1)
+texture_albedo_2 = Color(1, 0.9265203, 0.3203125, 1)
+texture_albedo_3 = Color(0.56078434, 0.78431374, 0.015686275, 1)
+texture_albedo_4 = Color(0.48974344, 0.8255208, 0.032246906, 1)
+texture_albedo_5 = Color(0.4244792, 0.2130686, 0.029846193, 1)
+texture_albedo_6 = Color(0.9869792, 0.8628438, 0.26473662, 1)
+texture_scale_1 = 1.4
+texture_scale_2 = 3.6
+texture_scale_3 = 0.7999999999999999
+texture_scale_4 = 1.3
+texture_scale_5 = 1.2000000000000002
+texture_scale_6 = 3.0
+texture_scale_7 = 1.2000000000000002
+texture_scale_8 = 0.9
+texture_scale_10 = 1.1
+texture_scale_12 = 0.9
+current_texture_preset = SubResource("Resource_uyltb")
+metadata/_custom_type_script = "uid://cddg1xr5hye1d"
+
+[node name="Chunk (0, -1)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=150482112 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(0, -1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (0, -1)" unique_id=754274566]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (-1, -1)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=502808024 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, -64)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-1, -1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (-1, -1)" unique_id=56719907]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (-1, 0)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=1333639509 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 0)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-1, 0)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (-1, 0)" unique_id=252279990]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (0, 0)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=122160758 node_paths=PackedStringArray("terrain_system")]
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (0, 0)" unique_id=42911293]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (-2, -1)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=1189360250 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, -64)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-2, -1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (-2, -1)" unique_id=1571304865]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (-2, 0)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=889489655 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, 0)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-2, 0)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (-2, 0)" unique_id=357278541]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (1, -1)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=2108481402 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, -64)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(1, -1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (1, -1)" unique_id=653476035]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (1, 0)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=491311651 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 0)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(1, 0)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (1, 0)" unique_id=470819815]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (1, -2)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=282183131 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, -128)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(1, -2)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (1, -2)" unique_id=1363280364]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (0, -2)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=2147048827 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -128)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(0, -2)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (0, -2)" unique_id=1445239428]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (-1, -2)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=1735551428 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, -128)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-1, -2)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (-1, -2)" unique_id=1813496080]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Chunk (-2, -2)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=1392493461 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, -128)
+script = ExtResource("9_oye2u")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-2, -2)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="ISLAND/MarchingSquaresTerrain/Chunk (-2, -2)" unique_id=53261783]
+cast_shadow = 0
+script = ExtResource("10_h6vph")
+
+[node name="Dagat" type="MeshInstance3D" parent="ISLAND" unique_id=1813932752]
+transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, -1.5, 0)
+mesh = SubResource("PlaneMesh_cbjsr")
+
+[node name="Kahoys" type="Node3D" parent="ISLAND" unique_id=73657917]
+
+[node name="Kahoy" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1907764821]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 69.08512, 0.1, -35.299133)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy" unique_id=854130429]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy/StaticBody3D" unique_id=270518826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy2" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1100079173]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 63.948723, 0.1, -18.423191)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy2" unique_id=402754661]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy2/StaticBody3D" unique_id=1873323967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy3" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=900889357]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 29.776043, 0.1, -42.51531)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy3" unique_id=565519836]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy3/StaticBody3D" unique_id=1631377393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy4" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=213450885]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 16.640001, 0.1, -14.258964)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy4" unique_id=886857681]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy4/StaticBody3D" unique_id=1213224862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy5" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1431641533]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 75.49762, 4.3991218, -50.24132)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy5" unique_id=1615217776]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy5/StaticBody3D" unique_id=1681074468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy6" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1963024856]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 78.09211, 0.1, 5.3155603)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy6" unique_id=1969464694]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy6/StaticBody3D" unique_id=994261400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy7" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=237872913]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 7.759617, 0.1, 6.9945316)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy7" unique_id=1571522015]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy7/StaticBody3D" unique_id=153371228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy8" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1485184496]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 44.872025, 0.1, 15.530775)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy8" unique_id=184239931]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy8/StaticBody3D" unique_id=1392533714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy9" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=2000888020]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 28.480856, 0.1, 41.85574)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy9" unique_id=1278288963]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy9/StaticBody3D" unique_id=775244278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy10" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=559193918]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 93.74933, 0.1, 34.880043)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy10" unique_id=55087311]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy10/StaticBody3D" unique_id=311248421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy11" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=322993382]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 63.33883, 0.1, 27.707472)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy11" unique_id=2092976028]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy11/StaticBody3D" unique_id=637074113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy12" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=526172582]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -84.511955, 0.1, 0)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy12" unique_id=1065659552]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy12/StaticBody3D" unique_id=730556446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy13" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=270843423]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -16.571777, 0.1, 2.2148075)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy13" unique_id=1291169592]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy13/StaticBody3D" unique_id=1234119860]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy14" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1040506259]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4.767082, 0.1, 31.914055)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy14" unique_id=1591186799]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy14/StaticBody3D" unique_id=1707935485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy15" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=349738551]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -83.1255, 0.1, 42.998955)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy15" unique_id=1891217608]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy15/StaticBody3D" unique_id=1613233646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy16" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1402173720]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -43.419716, 0.1, 15.476654)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy16" unique_id=900061253]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy16/StaticBody3D" unique_id=839599015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy17" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1194662432]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -56.39204, 0.1, -57.301548)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy17" unique_id=144395286]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy17/StaticBody3D" unique_id=1357883189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy18" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1825768959]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -25.86755, 0.1, -71.84247)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy18" unique_id=1466604826]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy18/StaticBody3D" unique_id=719219036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy19" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=419715042]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -81.980354, 0.1, -34.364494)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy19" unique_id=436923758]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy19/StaticBody3D" unique_id=1446925375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy20" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=177784417]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -47.969902, 0.1, -15.451265)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy20" unique_id=1758314831]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy20/StaticBody3D" unique_id=1094790865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy21" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=558990844]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -21.30818, 0.1, 47.22673)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy21" unique_id=344422530]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy21/StaticBody3D" unique_id=1073595770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy22" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=575689284]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 32.35962, 0.1, -93.0161)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy22" unique_id=1754324790]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy22/StaticBody3D" unique_id=838585456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy23" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1565669370]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.1, -95.11534)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy23" unique_id=95309725]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy23/StaticBody3D" unique_id=790504782]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy24" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1756138619]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 3.8213005, 0.1, -37.756638)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy24" unique_id=199257934]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy24/StaticBody3D" unique_id=1549966280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy25" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=1037560060]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 96.573, 11, -102.12)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy25" unique_id=1655656788]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy25/StaticBody3D" unique_id=892009807]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Kahoy26" type="MeshInstance3D" parent="ISLAND/Kahoys" unique_id=670124062]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 89.096, 11, -63.413)
+mesh = ExtResource("14_qrpbx")
+skeleton = NodePath("../../../SKY")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ISLAND/Kahoys/Kahoy26" unique_id=1565071362]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Kahoys/Kahoy26/StaticBody3D" unique_id=1178258671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7132566, 0)
+visible = false
+shape = SubResource("BoxShape3D_qrpbx")
+
+[node name="Foliages" type="Node3D" parent="ISLAND" unique_id=360004925]
+visible = false
+
+[node name="AudioSources" type="Node3D" parent="ISLAND" unique_id=881782534]
+
+[node name="Dagat" type="Node3D" parent="ISLAND/AudioSources" unique_id=487470996]
+
+[node name="Node3D" type="Area3D" parent="ISLAND/AudioSources/Dagat" unique_id=550617724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.34724, 3.8824024, 0)
+script = ExtResource("15_auh40")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/AudioSources/Dagat/Node3D" unique_id=1584707894]
+shape = SubResource("BoxShape3D_ruire")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ISLAND/AudioSources/Dagat/Node3D" unique_id=1037223794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28279114, 0, 0)
+stream = ExtResource("15_ruire")
+
+[node name="Node3D2" type="Area3D" parent="ISLAND/AudioSources/Dagat" unique_id=1745178279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.68038, 3.8824024, 0)
+script = ExtResource("15_auh40")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/AudioSources/Dagat/Node3D2" unique_id=330814029]
+shape = SubResource("BoxShape3D_ruire")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ISLAND/AudioSources/Dagat/Node3D2" unique_id=50180758]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28279114, 0, 0)
+stream = ExtResource("15_ruire")
+
+[node name="Wind" type="AudioStreamPlayer" parent="ISLAND/AudioSources" unique_id=607537240]
+stream = ExtResource("17_mgn8j")
+autoplay = true
+playback_type = 1
+parameters/looping = true
+
+[node name="Bird" type="AudioStreamPlayer" parent="ISLAND/AudioSources" unique_id=849614213]
+stream = ExtResource("18_663dh")
+autoplay = true
+playback_type = 1
+parameters/looping = true
+
+[node name="SKY" type="Node3D" parent="." unique_id=1829971248]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 71.67545, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SKY" unique_id=169244059]
+layers = 1023
+mesh = SubResource("PlaneMesh_b37wp")
+
+[node name="Player" parent="." unique_id=478782437 instance=ExtResource("11_jwbod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.867311, 0.5601834, -17.111214)
+disable_mode = 2
+
+[node name="FishingSpot" parent="." unique_id=1985687269 instance=ExtResource("16_fsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.223, 0, -10.332)
+
+[node name="Spawner" parent="." unique_id=1235847215 node_paths=PackedStringArray("player") instance=ExtResource("21_v3fq3")]
+player = NodePath("../Player")
+tanky_fish = ExtResource("24_oj3ja")
+normal_fish = ExtResource("25_mlmqm")
+ranged_fish = ExtResource("26_mlmqm")
+
+[node name="FishingSystem" type="Node" parent="." unique_id=670019011]
+script = ExtResource("14_fsys")
+items_db = ExtResource("17_db")
+rarity_config = ExtResource("18_rc")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1882678914]
+
+[node name="FishingMinigame" parent="UI" unique_id=1396498718 instance=ExtResource("15_fmg")]
+
+[node name="CameraRig" parent="." unique_id=779826955 instance=ExtResource("24_cr")]
+
+[node name="TestDummy" type="StaticBody3D" parent="." unique_id=558007968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 1, -17)
+script = ExtResource("25_td")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestDummy" unique_id=1419577542]
+shape = SubResource("BoxShape3D_dummy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestDummy" unique_id=1898371551]
+mesh = SubResource("BoxMesh_dummy")
+
+[node name="HealthComponent" type="Node" parent="TestDummy" unique_id=515237334]
+script = ExtResource("26_hc")
+
+[node name="Label3D" type="Label3D" parent="TestDummy" unique_id=1138715273]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+text = "HP: 100 / 100"
+
+[node name="DebugHUD" type="CanvasLayer" parent="." unique_id=483026366]
+layer = 10
+script = ExtResource("27_dh")
+
+[node name="Label" type="Label" parent="DebugHUD" unique_id=1019344999]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 80.0

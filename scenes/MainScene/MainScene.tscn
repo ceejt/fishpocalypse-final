@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://kxdso5iygehk" path="res://assets/resources/wave_noise.tres" id="13_61ffe"]
 [ext_resource type="Texture2D" uid="uid://cv4ugy50jeh4i" path="res://assets/resources/cloud_noise.tres" id="13_g63d6"]
 [ext_resource type="Script" uid="uid://d2m8wwurpal4s" path="res://scripts/fishSystem/fishing_system.gd" id="14_fsys"]
+[ext_resource type="Texture2D" uid="uid://dkg22bs2y3afm" path="res://assets/sprites/splash.png" id="14_mlmqm"]
+[ext_resource type="Script" uid="uid://c4whb06t4dur5" path="res://scripts/EnvironmentRelated/dagat_splash.gd" id="14_nlggb"]
 [ext_resource type="ArrayMesh" uid="uid://dxqp0wkpiex87" path="res://assets/models/kahoy/Sketchfab_Scene_coconut_tree_coconut_tree_mat_0.res" id="14_qrpbx"]
 [ext_resource type="Script" uid="uid://cb2jjm11a4e1i" path="res://scripts/EnvironmentRelated/dagat_script.gd" id="15_auh40"]
 [ext_resource type="PackedScene" uid="uid://cgxmpu1beld0d" path="res://scenes/FishingRelated/fishing_minigame.tscn" id="15_fmg"]
@@ -25,12 +27,10 @@
 [ext_resource type="PackedScene" uid="uid://x0tobd048vlo" path="res://scenes/EnemyRelated/enemySpawner.tscn" id="21_v3fq3"]
 [ext_resource type="PackedScene" uid="uid://dwr1m6px173c6" path="res://scenes/DayNightSystem/dayNightSystem.tscn" id="23_bv014"]
 [ext_resource type="PackedScene" uid="uid://sheavwaiaj2f" path="res://scenes/EnemyRelated/tank_fish.tscn" id="24_oj3ja"]
-[ext_resource type="PackedScene" uid="uid://by4e1q3ce1ehm" path="res://scenes/EnemyRelated/fish.tscn" id="25_mlmqm"]
-[ext_resource type="PackedScene" uid="uid://hxknigqyh2fs" path="res://scenes/EnemyRelated/ranged_fish.tscn" id="26_mlmqm"]
-[ext_resource type="PackedScene" uid="uid://dujw7glgc57os" path="res://scenes/player/CameraRig.tscn" id="28_cr"]
 [ext_resource type="Script" uid="uid://d0testdmy1p4r" path="res://scripts/test_dummy.gd" id="29_td"]
 [ext_resource type="Script" uid="uid://butapasd4olx0" path="res://scripts/components/health_component.gd" id="30_hc"]
 [ext_resource type="PackedScene" uid="uid://dfygvlwksvhog" path="res://scenes/FishingRelated/shore_zone.tscn" id="31_nlggb"]
+[ext_resource type="PackedScene" uid="uid://bjgds8umisd4" path="res://scenes/ItemRelated/ItemSpawner.tscn" id="55_y07ru"]
 
 [sub_resource type="Texture2D" id="Texture2D_p1dug"]
 resource_local_to_scene = false
@@ -93,11 +93,42 @@ shader_parameter/pixel_size = 256.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_cbjsr"]
 material = SubResource("ShaderMaterial_61ffe")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlggb"]
+atlas = ExtResource("14_mlmqm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edxqr"]
+atlas = ExtResource("14_mlmqm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m30le"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlggb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edxqr")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 5.5
+}]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nlggb"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_qrpbx"]
 size = Vector3(1, 4.9920654, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ruire"]
 size = Vector3(67, 5, 150)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dummy"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dummy"]
+size = Vector3(1, 2, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g63d6"]
 render_priority = 0
@@ -108,12 +139,6 @@ shader_parameter/speed = 0.0030000001425
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_b37wp"]
 material = SubResource("ShaderMaterial_g63d6")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dummy"]
-size = Vector3(1, 2, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_dummy"]
-size = Vector3(1, 2, 1)
 
 [node name="TestScene" type="Node3D" unique_id=469542510]
 
@@ -283,6 +308,27 @@ script = ExtResource("10_h6vph")
 [node name="Dagat" type="MeshInstance3D" parent="ISLAND" unique_id=1813932752]
 transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, -1.5, 0)
 mesh = SubResource("PlaneMesh_cbjsr")
+script = ExtResource("14_nlggb")
+
+[node name="splash" type="AnimatedSprite3D" parent="ISLAND/Dagat" unique_id=781028323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.379747, 0)
+top_level = true
+visible = false
+pixel_size = 0.05
+billboard = 2
+shaded = true
+double_sided = false
+alpha_scissor_threshold = 1.0
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_m30le")
+animation = &"splash"
+autoplay = "splash"
+
+[node name="Area3D" type="Area3D" parent="ISLAND/Dagat" unique_id=1230704647]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/Dagat/Area3D" unique_id=845940657]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_nlggb")
 
 [node name="Kahoys" type="Node3D" parent="ISLAND" unique_id=73657917]
 
@@ -650,6 +696,155 @@ shape = SubResource("BoxShape3D_ruire")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28279114, 0, 0)
 stream = ExtResource("15_ruire")
 
+[node name="Fishing Zones" type="Node3D" parent="." unique_id=1064904067]
+transform = Transform3D(0.9999061, -0.013700406, 0, 0.013700406, 0.9999061, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="TestDummy" type="StaticBody3D" parent="Fishing Zones" unique_id=650333710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 1, -17)
+script = ExtResource("29_td")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fishing Zones/TestDummy" unique_id=506169165]
+shape = SubResource("BoxShape3D_dummy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fishing Zones/TestDummy" unique_id=1002995156]
+mesh = SubResource("BoxMesh_dummy")
+
+[node name="HealthComponent" type="Node" parent="Fishing Zones/TestDummy" unique_id=1261737286]
+script = ExtResource("30_hc")
+
+[node name="Label3D" type="Label3D" parent="Fishing Zones/TestDummy" unique_id=1014811233]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+text = "HP: 100 / 100"
+
+[node name="ShoreZone" parent="Fishing Zones" unique_id=561009656 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.595, 71.88826, 0, -15.986887)
+
+[node name="ShoreZone2" parent="Fishing Zones" unique_id=124040362 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.6946584, 0, 0.53231144, 0, 1, 0, -0.7193398, 0, 0.5140472, 75.00092, 0, -4.4259176)
+
+[node name="ShoreZone3" parent="Fishing Zones" unique_id=1732718202 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.49242356, 0, 0.70933986, 0, 1, 0, -0.87035567, 0, 0.4013252, 82.17154, 1.4305115e-06, -0.66255236)
+
+[node name="ShoreZone4" parent="Fishing Zones" unique_id=1946138 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 0.585, 0, 1, 0, -1, 0, -2.5571161e-08, 89.09127, -4.7683716e-07, 2.0373597)
+
+[node name="ShoreZone5" parent="Fishing Zones" unique_id=1506357695 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.70710677, 0, 1.1737972, 0, 1, 0, -0.70710677, 0, 1.1737972, 98.52703, -4.7683716e-07, 6.9794955)
+
+[node name="ShoreZone6" parent="Fishing Zones" unique_id=462689217 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.8771462, 0, 0.3433598, 0, 1, 0, -0.4802235, 0, 0.6271595, 105.60508, -0.32570124, 16.668257)
+
+[node name="ShoreZone7" parent="Fishing Zones" unique_id=539086386 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.46638665, 0, 0.6324754, 0, 1, 0, -0.88458097, 0, 0.33346644, 111.94784, -0.32570124, 20.815096)
+
+[node name="ShoreZone8" parent="Fishing Zones" unique_id=48438052 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.395, 114.02136, -0.32570124, 25.202772)
+
+[node name="ShoreZone9" parent="Fishing Zones" unique_id=821763315 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.215, 115.99408, -0.32570124, 32.513405)
+
+[node name="ShoreZone10" parent="Fishing Zones" unique_id=797598047 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.70090926, 0, -0.8665993, 0, 1, 0, 0.71325046, 0, 0.85160476, 111.11233, -0.32570124, 46.392864)
+
+[node name="ShoreZone11" parent="Fishing Zones" unique_id=1147650447 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.395, 114.8997, -0.32570124, 40.2929)
+
+[node name="ShoreZone12" parent="Fishing Zones" unique_id=101514398 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 7.89, 0, 3.12, 0, -1, 0, -3.4488284e-07, 66.79348, -0.32570314, 51.965034)
+
+[node name="ShoreZone13" parent="Fishing Zones" unique_id=1553474790 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 2.725, 0, 3.12, 0, -1, 0, -1.1911353e-07, 39.682167, -0.32570314, 53.96243)
+
+[node name="ShoreZone14" parent="Fishing Zones" unique_id=1784032263 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 3.4, 0, 3.12, 0, -1, 0, -1.4861872e-07, 89.29378, -0.3257022, 49.786068)
+
+[node name="ShoreZone15" parent="Fishing Zones" unique_id=1120636912 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 2.725, 0, 3.12, 0, -1, 0, -1.1911353e-07, 5.05764, -0.3257022, 57.841698)
+
+[node name="ShoreZone16" parent="Fishing Zones" unique_id=1972508495 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 1.35, 0, 3.12, 0, -1, 0, -5.9010375e-08, -13.679045, -0.3257022, 55.970997)
+
+[node name="ShoreZone17" parent="Fishing Zones" unique_id=2129359415 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 1.35, 0, 3.12, 0, -1, 0, -5.9010375e-08, -31.843626, -0.3257022, 55.63053)
+
+[node name="ShoreZone18" parent="Fishing Zones" unique_id=1425739791 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 2.245, 0, 3.12, 0, -1, 0, -9.813206e-08, -60.88298, -0.3257022, 51.926857)
+
+[node name="ShoreZone19" parent="Fishing Zones" unique_id=1101707171 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-8.1740296e-08, 0, 2.245, 0, 3.12, 0, -1.87, 0, -9.813206e-08, -82.22213, -0.3257041, 50.809902)
+
+[node name="ShoreZone20" parent="Fishing Zones" unique_id=744564400 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1.2144679, 0, 1.7071112, 0, 3.12, 0, -1.4219592, 0, 1.4580108, -102.53177, -0.3257041, 40.999786)
+
+[node name="ShoreZone21" parent="Fishing Zones" unique_id=1337490734 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1.87, 0, 0, 0, 3.12, 0, 0, 0, 1.585, -109.19893, -0.3257041, 26.551989)
+
+[node name="ShoreZone22" parent="Fishing Zones" unique_id=317370630 instance=ExtResource("31_nlggb")]
+transform = Transform3D(2.705, 0, 0, 0, 3.12, 0, 0, 0, 4.41, -113.620316, -0.3257041, 0.0021629333)
+
+[node name="ShoreZone23" parent="Fishing Zones" unique_id=767949234 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1.8274715, 0, -2.1270452, 0, 3.12, 0, 1.9943352, 0, 1.9490777, -99.69582, -0.3257041, -30.834118)
+
+[node name="ShoreZone24" parent="Fishing Zones" unique_id=2005265933 instance=ExtResource("31_nlggb")]
+transform = Transform3D(2.705, 0, 0, 0, 3.12, 0, 0, 0, 1.32, -90.67629, -0.32570314, -47.710068)
+
+[node name="ShoreZone25" parent="Fishing Zones" unique_id=529493387 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.1744375e-08, 0, 2.755, 0, 3.12, 0, -0.955, 0, -1.2042489e-07, -10.413317, -0.32570314, -40.016117)
+
+[node name="ShoreZone26" parent="Fishing Zones" unique_id=2009133678 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.1744375e-08, 0, 3.685, 0, 3.12, 0, -0.955, 0, -1.6107646e-07, -16.830029, -0.32570314, -68.20906)
+
+[node name="ShoreZone27" parent="Fishing Zones" unique_id=1655999699 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-0.6633988, 0, 1.1113799, 0, 3.12, 0, -0.6869694, 0, -1.0732473, 8.673876, -0.32570505, -44.57505)
+
+[node name="ShoreZone28" parent="Fishing Zones" unique_id=765665514 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.8009304, 0, -0.52557665, 0, 3.12, 0, 0.5201303, 0, 0.80931705, 14.060522, -0.32570314, -52.19068)
+
+[node name="ShoreZone29" parent="Fishing Zones" unique_id=1505132780 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-0.99747276, 0, -1.3755485, 0, 3.12, 0, 1.2317765, 0, -1.113897, 9.52679, -0.32570314, -62.04289)
+
+[node name="ShoreZone30" parent="Fishing Zones" unique_id=1745789101 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.6927325, 0, 0.81914204, 0, 3.12, 0, -0.6573786, 0, 0.8631955, -46.697388, -0.32570505, -48.518463)
+
+[node name="ShoreZone31" parent="Fishing Zones" unique_id=1627577556 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.1744375e-08, 0, 1.19, 0, 3.12, 0, -0.955, 0, -5.2016553e-08, -37.968414, -0.32570505, -44.17724)
+
+[node name="ShoreZone32" parent="Fishing Zones" unique_id=577569623 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.1744375e-08, 0, 1.19, 0, 3.12, 0, -0.955, 0, -5.2016553e-08, -28.762331, -0.32570505, -42.016052)
+
+[node name="ShoreZone33" parent="Fishing Zones" unique_id=53302495 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.955, 0, 0, 0, 3.12, 0, 0, 0, 1.19, -50.048733, -0.32570505, -57.680775)
+
+[node name="ShoreZone34" parent="Fishing Zones" unique_id=2042241954 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.31878558, 0, -1.5129396, 0, 3.12, 0, 0.9002226, 0, 0.5357601, -42.783897, -0.32570505, -65.75271)
+
+[node name="ShoreZone35" parent="Fishing Zones" unique_id=1143494138 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.733368, 2.0077887, -76.57085)
+
+[node name="ShoreZone36" parent="Fishing Zones" unique_id=1664059348 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1.0707577, 0, 1.5176723, 0, 1, 0, -1.6177386, 0, 1.0045253, 69.60188, 2.0140347, -67.62434)
+
+[node name="ShoreZone37" parent="Fishing Zones" unique_id=1245570762 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.93358034, 0, 0.35836792, 0, 1, 0, -0.35836792, 0, 0.93358034, 58.841045, 2.0077906, -86.16615)
+
+[node name="ShoreZone38" parent="Fishing Zones" unique_id=702180306 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1.99, 0, 0, 0, 1, 0, 0, 0, 1.405, 56.182285, 2.0077906, -97.68696)
+
+[node name="ShoreZone39" parent="Fishing Zones" unique_id=327724032 instance=ExtResource("31_nlggb")]
+transform = Transform3D(1.1266606, 0, -1.6193621, 0, 1, 0, 1.4420596, 0, 1.2651844, 79.787796, 0, -30.584532)
+
+[node name="ShoreZone40" parent="Fishing Zones" unique_id=893483384 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 1.165, 0, 1, 0, -1, 0, -5.0923767e-08, 23.7365, 2, 55.825962)
+
+[node name="ShoreZone41" parent="Fishing Zones" unique_id=42383813 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-4.371139e-08, 0, 1.165, 0, 1, 0, -1, 0, -5.0923767e-08, -23.585804, 2, 54.315613)
+
+[node name="ShoreZone42" parent="Fishing Zones" unique_id=764884028 instance=ExtResource("31_nlggb")]
+transform = Transform3D(0.7604059, 0, 0.75660694, 0, 1, 0, -0.649448, 0, 0.8858729, -39.384502, 2, 52.651226)
+
+[node name="ShoreZone43" parent="Fishing Zones" unique_id=266579001 instance=ExtResource("31_nlggb")]
+transform = Transform3D(-0.5807029, 0, 0.94844455, 0, 1, 0, -0.8141154, 0, -0.6765189, -47.122715, 2, 49.902992)
+
 [node name="SKY" type="Node3D" parent="." unique_id=1829971248]
 transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 71.67545, 0)
 
@@ -664,160 +859,46 @@ disable_mode = 2
 [node name="Spawner" parent="." unique_id=1235847215 node_paths=PackedStringArray("player") instance=ExtResource("21_v3fq3")]
 player = NodePath("../Player")
 tanky_fish = ExtResource("24_oj3ja")
+spawn_points_container = NodePath("../SpawnPoints")
+spawn_interval = 0.5
+dbg = false
+
+[node name="SpawnPoints" type="Node3D" parent="." unique_id=9000001]
+
+[node name="SP1" type="Marker3D" parent="SpawnPoints" unique_id=9000002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.958435, 1, -14.789032)
+
+[node name="SP2" type="Marker3D" parent="SpawnPoints" unique_id=9000003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.862305, 1, 17.815258)
+
+[node name="SP3" type="Marker3D" parent="SpawnPoints" unique_id=9000004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.941513, 1, -21.054901)
+
+[node name="SP4" type="Marker3D" parent="SpawnPoints" unique_id=9000005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.365753, 1, 29.253654)
+
+[node name="SP5" type="Marker3D" parent="SpawnPoints" unique_id=9000006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.133236, 1, 40.280846)
+
+[node name="SP6" type="Marker3D" parent="SpawnPoints" unique_id=9000007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.177986, 1, 25.517551)
+
+[node name="SP7" type="Marker3D" parent="SpawnPoints" unique_id=9000008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.247414, 1, 25.087666)
+
+[node name="SP8" type="Marker3D" parent="SpawnPoints" unique_id=9000009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.878887, 1, -65.880455)
 
 [node name="FishingSystem" type="Node" parent="." unique_id=670019011]
 script = ExtResource("14_fsys")
 items_db = ExtResource("17_db")
 rarity_config = ExtResource("18_rc")
+minigame = NodePath("../UI/FishingMinigame")
+item_spawner = NodePath("../ItemSpawner")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1882678914]
 
 [node name="FishingMinigame" parent="UI" unique_id=1396498718 instance=ExtResource("15_fmg")]
 
-[node name="CameraRig" parent="." unique_id=393608575 instance=ExtResource("28_cr")]
-
-[node name="TestDummy" type="StaticBody3D" parent="." unique_id=650333710]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 1, -17)
-script = ExtResource("29_td")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TestDummy" unique_id=506169165]
-shape = SubResource("BoxShape3D_dummy")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TestDummy" unique_id=1002995156]
-mesh = SubResource("BoxMesh_dummy")
-
-[node name="HealthComponent" type="Node" parent="TestDummy" unique_id=1261737286]
-script = ExtResource("30_hc")
-
-[node name="Label3D" type="Label3D" parent="TestDummy" unique_id=1014811233]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-text = "HP: 100 / 100"
-
-[node name="ShoreZone" parent="." unique_id=561009656 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.595, 71.88826, 0, -15.986887)
-
-[node name="ShoreZone2" parent="." unique_id=124040362 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.6946584, 0, 0.53231144, 0, 1, 0, -0.7193398, 0, 0.5140472, 75.00092, 0, -4.4259176)
-
-[node name="ShoreZone3" parent="." unique_id=1732718202 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.49242356, 0, 0.70933986, 0, 1, 0, -0.87035567, 0, 0.4013252, 82.17154, 1.4305115e-06, -0.66255236)
-
-[node name="ShoreZone4" parent="." unique_id=1946138 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 0.585, 0, 1, 0, -1, 0, -2.5571161e-08, 89.09127, -4.7683716e-07, 2.0373597)
-
-[node name="ShoreZone5" parent="." unique_id=1506357695 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.70710677, 0, 1.1737972, 0, 1, 0, -0.70710677, 0, 1.1737972, 98.52703, -4.7683716e-07, 6.9794955)
-
-[node name="ShoreZone6" parent="." unique_id=462689217 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.8771462, 0, 0.3433598, 0, 1, 0, -0.4802235, 0, 0.6271595, 105.60508, -0.32570124, 16.668257)
-
-[node name="ShoreZone7" parent="." unique_id=539086386 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.46638665, 0, 0.6324754, 0, 1, 0, -0.88458097, 0, 0.33346644, 111.94784, -0.32570124, 20.815096)
-
-[node name="ShoreZone8" parent="." unique_id=48438052 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.395, 114.02136, -0.32570124, 25.202772)
-
-[node name="ShoreZone9" parent="." unique_id=821763315 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.215, 115.99408, -0.32570124, 32.513405)
-
-[node name="ShoreZone10" parent="." unique_id=797598047 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.70090926, 0, -0.8665993, 0, 1, 0, 0.71325046, 0, 0.85160476, 111.11233, -0.32570124, 46.392864)
-
-[node name="ShoreZone11" parent="." unique_id=1147650447 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.395, 114.8997, -0.32570124, 40.2929)
-
-[node name="ShoreZone12" parent="." unique_id=101514398 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 7.89, 0, 3.12, 0, -1, 0, -3.4488284e-07, 66.79348, -0.32570314, 51.965034)
-
-[node name="ShoreZone13" parent="." unique_id=1553474790 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 2.725, 0, 3.12, 0, -1, 0, -1.1911353e-07, 39.682167, -0.32570314, 53.96243)
-
-[node name="ShoreZone14" parent="." unique_id=1784032263 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 3.4, 0, 3.12, 0, -1, 0, -1.4861872e-07, 89.29378, -0.3257022, 49.786068)
-
-[node name="ShoreZone15" parent="." unique_id=1120636912 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 2.725, 0, 3.12, 0, -1, 0, -1.1911353e-07, 5.05764, -0.3257022, 57.841698)
-
-[node name="ShoreZone16" parent="." unique_id=1972508495 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 1.35, 0, 3.12, 0, -1, 0, -5.9010375e-08, -13.679045, -0.3257022, 55.970997)
-
-[node name="ShoreZone17" parent="." unique_id=2129359415 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 1.35, 0, 3.12, 0, -1, 0, -5.9010375e-08, -31.843626, -0.3257022, 55.63053)
-
-[node name="ShoreZone18" parent="." unique_id=1425739791 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 2.245, 0, 3.12, 0, -1, 0, -9.813206e-08, -60.88298, -0.3257022, 51.926857)
-
-[node name="ShoreZone19" parent="." unique_id=1101707171 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-8.1740296e-08, 0, 2.245, 0, 3.12, 0, -1.87, 0, -9.813206e-08, -82.22213, -0.3257041, 50.809902)
-
-[node name="ShoreZone20" parent="." unique_id=744564400 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1.2144679, 0, 1.7071112, 0, 3.12, 0, -1.4219592, 0, 1.4580108, -102.53177, -0.3257041, 40.999786)
-
-[node name="ShoreZone21" parent="." unique_id=1337490734 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1.87, 0, 0, 0, 3.12, 0, 0, 0, 1.585, -109.19893, -0.3257041, 26.551989)
-
-[node name="ShoreZone22" parent="." unique_id=317370630 instance=ExtResource("31_nlggb")]
-transform = Transform3D(2.705, 0, 0, 0, 3.12, 0, 0, 0, 4.41, -113.620316, -0.3257041, 0.0021629333)
-
-[node name="ShoreZone23" parent="." unique_id=767949234 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1.8274715, 0, -2.1270452, 0, 3.12, 0, 1.9943352, 0, 1.9490777, -99.69582, -0.3257041, -30.834118)
-
-[node name="ShoreZone24" parent="." unique_id=2005265933 instance=ExtResource("31_nlggb")]
-transform = Transform3D(2.705, 0, 0, 0, 3.12, 0, 0, 0, 1.32, -90.67629, -0.32570314, -47.710068)
-
-[node name="ShoreZone25" parent="." unique_id=529493387 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.1744375e-08, 0, 2.755, 0, 3.12, 0, -0.955, 0, -1.2042489e-07, -10.413317, -0.32570314, -40.016117)
-
-[node name="ShoreZone26" parent="." unique_id=2009133678 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.1744375e-08, 0, 3.685, 0, 3.12, 0, -0.955, 0, -1.6107646e-07, -16.830029, -0.32570314, -68.20906)
-
-[node name="ShoreZone27" parent="." unique_id=1655999699 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-0.6633988, 0, 1.1113799, 0, 3.12, 0, -0.6869694, 0, -1.0732473, 8.673876, -0.32570505, -44.57505)
-
-[node name="ShoreZone28" parent="." unique_id=765665514 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.8009304, 0, -0.52557665, 0, 3.12, 0, 0.5201303, 0, 0.80931705, 14.060522, -0.32570314, -52.19068)
-
-[node name="ShoreZone29" parent="." unique_id=1505132780 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-0.99747276, 0, -1.3755485, 0, 3.12, 0, 1.2317765, 0, -1.113897, 9.52679, -0.32570314, -62.04289)
-
-[node name="ShoreZone30" parent="." unique_id=1745789101 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.6927325, 0, 0.81914204, 0, 3.12, 0, -0.6573786, 0, 0.8631955, -46.697388, -0.32570505, -48.518463)
-
-[node name="ShoreZone31" parent="." unique_id=1627577556 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.1744375e-08, 0, 1.19, 0, 3.12, 0, -0.955, 0, -5.2016553e-08, -37.968414, -0.32570505, -44.17724)
-
-[node name="ShoreZone32" parent="." unique_id=577569623 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.1744375e-08, 0, 1.19, 0, 3.12, 0, -0.955, 0, -5.2016553e-08, -28.762331, -0.32570505, -42.016052)
-
-[node name="ShoreZone33" parent="." unique_id=53302495 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.955, 0, 0, 0, 3.12, 0, 0, 0, 1.19, -50.048733, -0.32570505, -57.680775)
-
-[node name="ShoreZone34" parent="." unique_id=2042241954 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.31878558, 0, -1.5129396, 0, 3.12, 0, 0.9002226, 0, 0.5357601, -42.783897, -0.32570505, -65.75271)
-
-[node name="ShoreZone35" parent="." unique_id=1143494138 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.733368, 2.0077887, -76.57085)
-
-[node name="ShoreZone36" parent="." unique_id=1664059348 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1.0707577, 0, 1.5176723, 0, 1, 0, -1.6177386, 0, 1.0045253, 69.60188, 2.0140347, -67.62434)
-
-[node name="ShoreZone37" parent="." unique_id=1245570762 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.93358034, 0, 0.35836792, 0, 1, 0, -0.35836792, 0, 0.93358034, 58.841045, 2.0077906, -86.16615)
-
-[node name="ShoreZone38" parent="." unique_id=702180306 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1.99, 0, 0, 0, 1, 0, 0, 0, 1.405, 56.182285, 2.0077906, -97.68696)
-
-[node name="ShoreZone39" parent="." unique_id=327724032 instance=ExtResource("31_nlggb")]
-transform = Transform3D(1.1266606, 0, -1.6193621, 0, 1, 0, 1.4420596, 0, 1.2651844, 79.787796, 0, -30.584532)
-
-[node name="ShoreZone40" parent="." unique_id=893483384 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 1.165, 0, 1, 0, -1, 0, -5.0923767e-08, 23.7365, 2, 55.825962)
-
-[node name="ShoreZone41" parent="." unique_id=42383813 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-4.371139e-08, 0, 1.165, 0, 1, 0, -1, 0, -5.0923767e-08, -23.585804, 2, 54.315613)
-
-[node name="ShoreZone42" parent="." unique_id=764884028 instance=ExtResource("31_nlggb")]
-transform = Transform3D(0.7604059, 0, 0.75660694, 0, 1, 0, -0.649448, 0, 0.8858729, -39.384502, 2, 52.651226)
-
-[node name="ShoreZone43" parent="." unique_id=266579001 instance=ExtResource("31_nlggb")]
-transform = Transform3D(-0.5807029, 0, 0.94844455, 0, 1, 0, -0.8141154, 0, -0.6765189, -47.122715, 2, 49.902992)
+[node name="ItemSpawner" parent="." unique_id=2078365853 instance=ExtResource("55_y07ru")]
+rarity_config = ExtResource("18_rc")

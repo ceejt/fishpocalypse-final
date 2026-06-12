@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dnlrt1d3a4f1p" path="res://scripts/Fish/ranged_fish.gd" id="1_t6q6i"]
 [ext_resource type="PackedScene" uid="uid://blcs4n4ypsi37" path="res://scenes/EnemyRelated/bubble_projectile.tscn" id="2_j6bek"]
 [ext_resource type="AudioStream" uid="uid://b6u6vawuq8sct" path="res://assets/audio/enemy_shoot.mp3" id="4_m6y2y"]
+[ext_resource type="AudioStream" uid="uid://bjoljwdhhwxof" path="res://assets/audio/enemy_hurt.mp3" id="5_5o712"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6bek"]
 atlas = ExtResource("1_5s0u4")
@@ -31,6 +32,8 @@ animations = [{
 size = Vector3(1.4510918, 1.8967285, 0.31103516)
 
 [node name="Ranged_Fish" type="CharacterBody3D" unique_id=1313920117 node_paths=PackedStringArray("shoot_audio")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+collision_layer = 2
 script = ExtResource("1_t6q6i")
 projectile_scene = ExtResource("2_j6bek")
 shoot_audio = NodePath("AudioStreamPlayer3D")
@@ -52,3 +55,8 @@ shape = SubResource("BoxShape3D_j6bek")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1499587462]
 stream = ExtResource("4_m6y2y")
+max_polyphony = 5
+
+[node name="AudioStreamPlayer3D_2" type="AudioStreamPlayer3D" parent="." unique_id=976855786]
+stream = ExtResource("5_5o712")
+max_polyphony = 5

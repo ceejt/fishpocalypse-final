@@ -46,6 +46,8 @@ func apply_data() -> void:
 	if fire_timer:
 		fire_timer.wait_time = data.base_shot_delay * (rarity.shot_delay_multiplier if rarity else 1.0)
 		fire_timer.one_shot = true   # FIX: one-shot — CombatSystem decides when to fire again
+		if not fire_timer.timeout.is_connected(_on_fire_timer_timeout):
+			fire_timer.timeout.connect(_on_fire_timer_timeout)
 	else:
 		push_warning("Weapon: Timer node missing")
 
@@ -62,6 +64,9 @@ func shoot(direction: Vector3 = Vector3.FORWARD) -> void:
 		push_warning("Weapon: muzzle not ready")
 		return
 
+	if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation(&"shoot"):
+		sprite.play(&"shoot")
+
 	var shoot_dir := direction
 	if direction == Vector3.FORWARD and muzzle:
 		shoot_dir = -muzzle.global_transform.basis.z
@@ -73,9 +78,9 @@ func shoot(direction: Vector3 = Vector3.FORWARD) -> void:
 		if count > 1:
 			angle = deg_to_rad(10.0 * (i - (count - 1) / 2.0))
 		var dir := shoot_dir.rotated(Vector3.UP, angle)
-		p.global_position = muzzle.global_position if muzzle else global_position
-		p.setup(data.projectile, data.base_damage_per_shot * rarity.weapon_multiplier, dir)
 		get_tree().current_scene.add_child(p)
+		p.global_position = muzzle.global_position if muzzle else global_position
+		p.setup(data.projectile, data.base_damage_per_shot * rarity.damage_multiplier, dir)
 
 	if audio: audio.play()
 
@@ -107,3 +112,8 @@ func _on_picked_up() -> void:
 	# this node into the weapon_holder. Freeing it here would delete it
 	# before it can be equipped. Call this only after a drop/swap-out.
 	pass
+
+
+func _on_fire_timer_timeout() -> void:
+	if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation(&"default"):
+		sprite.play(&"default")

@@ -41,6 +41,10 @@ func _ready() -> void:
 	else:
 		push_warning("FishingSystem: GameState autoload not found — fishing enabled for all times (debug mode).")
 		_can_fish = true
+	if item_spawner == null:
+		var spawners := get_tree().get_nodes_in_group("item_spawners")
+		if not spawners.is_empty():
+			item_spawner = spawners[0] as ItemSpawner
 	minigame.caught.connect(_on_caught)
 	minigame.failed.connect(_on_failed)
 	call_deferred("_connect_shore_zones")

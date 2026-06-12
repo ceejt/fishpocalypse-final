@@ -3,20 +3,37 @@
 [ext_resource type="Script" uid="uid://donmcqvpf41ym" path="res://scripts/projectileSystem/projectile_data.gd" id="1_nnw1t"]
 [ext_resource type="Script" uid="uid://cb7xcgwlk1l1h" path="res://scripts/itemSystem/itemAttributes/fish_weapon_data.gd" id="1_yctga"]
 [ext_resource type="Texture2D" uid="uid://ldemr53bgmuu" path="res://assets/sprites/missing_sprite3.png" id="2_nnw1t"]
+[ext_resource type="Texture2D" uid="uid://4rt3ajrsxn2f" path="res://assets/sprites/posils.png" id="3_shrk"]
 
 [sub_resource type="Resource" id="Resource_1e3on"]
 script = ExtResource("1_nnw1t")
 sprite = ExtResource("2_nnw1t")
 metadata/_custom_type_script = "uid://donmcqvpf41ym"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_shrk_rest"]
+atlas = ExtResource("3_shrk")
+region = Rect2(0, 80, 40, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shrk_shoot"]
+atlas = ExtResource("3_shrk")
+region = Rect2(40, 80, 40, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_1e3on"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_nnw1t")
+"texture": SubResource("AtlasTexture_shrk_rest")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shrk_shoot")
+}],
+"loop": false,
+"name": &"shoot",
 "speed": 5.0
 }]
 

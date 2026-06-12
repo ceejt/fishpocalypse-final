@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://bqm0r3inv5lot"]
+
+[ext_resource type="Script" uid="uid://cstoogvcq44gw" path="res://scripts/ui/inventory_slots.gd" id="1_islots"]
+
+[node name="InventorySlots" type="HBoxContainer" unique_id=1487167293]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -632.0
+offset_right = 232.0
+offset_bottom = -584.0
+grow_vertical = 0
+theme_override_constants/separation = 6
+script = ExtResource("1_islots")
+
+[node name="SlotMain" type="ColorRect" parent="." unique_id=1309664741]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+color = Color(0.08, 0.08, 0.08, 0.85)
+
+[node name="Icon" type="TextureRect" parent="SlotMain" unique_id=802534486]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="KeyLabel" type="Label" parent="SlotMain" unique_id=1765652738]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -14.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 10
+text = "1"
+
+[node name="SlotLabel" type="Label" parent="SlotMain" unique_id=1640473642]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SlotSecondary" type="ColorRect" parent="." unique_id=1100935335]
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+color = Color(0.08, 0.08, 0.08, 0.85)
+
+[node name="Icon" type="TextureRect" parent="SlotSecondary" unique_id=1133745166]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="KeyLabel" type="Label" parent="SlotSecondary" unique_id=1259311083]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -14.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 10
+text = "2"
+
+[node name="SlotLabel" type="Label" parent="SlotSecondary" unique_id=1335584377]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 11
+text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SlotItem1" type="ColorRect" parent="." unique_id=179651548]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+color = Color(0.08, 0.08, 0.08, 0.85)
+
+[node name="Icon" type="TextureRect" parent="SlotItem1" unique_id=1473779927]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 6
+
+[node name="KeyLabel" type="Label" parent="SlotItem1" unique_id=1694619198]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -14.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 10
+text = "3"
+
+[node name="SlotLabel" type="Label" parent="SlotItem1" unique_id=970099985]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 11
+text = "I1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SlotItem2" type="ColorRect" parent="." unique_id=655341862]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+color = Color(0.08, 0.08, 0.08, 0.85)
+
+[node name="Icon" type="TextureRect" parent="SlotItem2" unique_id=859522903]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 6
+
+[node name="KeyLabel" type="Label" parent="SlotItem2" unique_id=1589336729]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -14.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 10
+text = "4"
+
+[node name="SlotLabel" type="Label" parent="SlotItem2" unique_id=245660627]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 11
+text = "I2"
+horizontal_alignment = 1
+vertical_alignment = 1
